@@ -14,8 +14,6 @@ namespace Broadway\Bundle\BroadwayBundle\DependencyInjection;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Compiler pass to define the dbal event store connection according to the configuration.
