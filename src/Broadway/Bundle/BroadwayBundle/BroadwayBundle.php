@@ -60,7 +60,7 @@ class BroadwayBundle extends Bundle
             )
         );
         $container->addCompilerPass(
-            new DefineDBALEventStoreConnectionCompilerPass()
+            new DefineDBALEventStoreConnectionCompilerPass($this->getContainerExtension()->getAlias())
         );
     }
 

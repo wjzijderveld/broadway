@@ -122,6 +122,11 @@ class BroadwayExtension extends Extension
     private function loadEventStore(array $config, ContainerBuilder $container)
     {
         $container->setParameter(
+            'broadway.event_store.dbal.connection',
+            $config['dbal']['connection']
+        );
+
+        $container->setParameter(
             'broadway.event_store.dbal.table',
             $config['dbal']['table']
         );
@@ -130,8 +135,6 @@ class BroadwayExtension extends Extension
             'broadway.event_store.dbal.use_binary',
             $config['dbal']['use_binary']
         );
-
-        $this->dbalEventStoreConnection = $config['dbal']['connection'];
     }
 
     /**
@@ -139,22 +142,6 @@ class BroadwayExtension extends Extension
      */
     public function defineDBALEventStoreConnection(ContainerBuilder $container)
     {
-        if (null === $this->dbalEventStoreConnection) {
-            $connectionServiceName = 'database_connection';
-        } else {
-            $connectionServiceName = sprintf('doctrine.dbal.%s_connection', $this->dbalEventStoreConnection);
-            if (!$container->hasDefinition($connectionServiceName)) {
-                throw new InvalidArgumentException(
-                    sprintf(
-                        'Invalid %s config: DBAL connection "%s" not found',
-                        $this->getAlias(),
-                        $this->dbalEventStoreConnection
-                    )
-                );
-            }
-        }
-
-        $container->setAlias('broadway.event_store.dbal.connection', $connectionServiceName);
     }
 
     private function configElasticsearch(array $config, ContainerBuilder $container)
