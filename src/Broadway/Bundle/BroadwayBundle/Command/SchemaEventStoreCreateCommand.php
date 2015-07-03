@@ -76,15 +76,4 @@ EOT
 
         return $error ? 1 : 0;
     }
-
-    private function getEventStore()
-    {
-        $eventStore = $this->getContainer()->get('broadway.event_store');
-
-        if (! $eventStore instanceof DBALEventStore) {
-            throw new RuntimeException("'broadway.event_store' must be configured as an instance of DBALEventStore");
-        }
-
-        return $eventStore;
-    }
 }
